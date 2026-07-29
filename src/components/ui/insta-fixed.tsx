@@ -28,7 +28,7 @@ export function InstaFixed() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={INSTA_ARIA}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white backdrop-blur-sm transition hover:border-white/60 hover:bg-black/80"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition hover:border-white/60 hover:bg-black/80"
     >
       <InstagramIcon />
       <span>{INSTA_HANDLE}</span>

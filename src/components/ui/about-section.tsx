@@ -1,21 +1,22 @@
 import Image from "next/image";
 
+import { FadeIn } from "@/components/ui/fade-in";
+
 const EYEBROW = "Manifesto";
 const TITLE_LINE_1 = "Marcas que";
 const TITLE_LINE_2 = "movem marcas.";
-const PARAGRAPH_1 =
-  "A DSY nasceu pra tirar marcas do lugar-comum. Fundada por Deysi, transformamos identidade, estratégia e conteúdo em presença — daquele tipo que a audiência lembra, comenta e volta a procurar.";
-const PARAGRAPH_2 =
-  "Trabalhamos lado a lado com fundadores e times pra construir marcas com voz própria, direção clara e execução afiada. Sem fórmula pronta, sem barulho — só o que faz diferença.";
-const FOUNDER_LABEL = "Founder & Creative Director";
-const FOUNDER_NAME = "Deysi";
+const INTRO_PARAGRAPH =
+  "A DSY é uma agência híbrida: soluções digitais e marketing estratégico sob o mesmo teto. Do código à campanha, entregamos tudo que uma marca precisa pra crescer com consistência.";
+const SECONDARY_PARAGRAPH =
+  "Fundada por Deisy, trabalhamos lado a lado com times e founders pra transformar ideia em produto, produto em presença e presença em resultado — sem terceirizar o que importa.";
+
 const LOGO_ALT = "DSY";
 
 export function AboutSection() {
   return (
-    <section className="w-full bg-black px-6 py-24 text-white md:px-12 md:py-32">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-24">
-        <div className="flex justify-center md:justify-start">
+    <section className="w-full px-6 py-24 text-white md:px-12 md:py-32">
+      <FadeIn className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-24">
+        <div className="hidden md:flex md:justify-start">
           <Image
             src="/dsy.png"
             alt={LOGO_ALT}
@@ -26,32 +27,23 @@ export function AboutSection() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <p className="text-xs uppercase tracking-[0.35em] opacity-60">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] opacity-60">
             {EYEBROW}
           </p>
 
-          <h2 className="text-4xl font-black leading-[0.95] tracking-tight md:text-6xl">
+          <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl">
             <span className="block">{TITLE_LINE_1}</span>
             <span className="block">{TITLE_LINE_2}</span>
           </h2>
 
           <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
-            {PARAGRAPH_1}
+            {INTRO_PARAGRAPH}
           </p>
           <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
-            {PARAGRAPH_2}
+            {SECONDARY_PARAGRAPH}
           </p>
-
-          <div className="mt-4 border-t border-white/10 pt-6">
-            <p className="text-sm uppercase tracking-[0.25em] opacity-80">
-              {FOUNDER_NAME}
-            </p>
-            <p className="mt-1 text-xs uppercase tracking-[0.3em] opacity-50">
-              {FOUNDER_LABEL}
-            </p>
-          </div>
         </div>
-      </div>
+      </FadeIn>
     </section>
   );
 }

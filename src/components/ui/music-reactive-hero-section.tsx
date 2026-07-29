@@ -122,20 +122,11 @@ type BeamState = {
   trebleIntensity: number;
   time: number;
   filmGrain: FilmGrain;
-  colorState: {
-    hue: number;
-    targetHue: number;
-    saturation: number;
-    targetSaturation: number;
-    lightness: number;
-    targetLightness: number;
-  };
   waves: Wave[];
   bassHistory: number[];
   postProcessing: {
     filmGrainIntensity: number;
     vignetteIntensity: number;
-    chromaticAberration: number;
     scanlineIntensity: number;
   };
 };
@@ -157,14 +148,6 @@ const buildInitialBeam = (filmGrain: FilmGrain): BeamState => ({
   trebleIntensity: 0,
   time: 0,
   filmGrain,
-  colorState: {
-    hue: 30,
-    targetHue: 30,
-    saturation: 80,
-    targetSaturation: 80,
-    lightness: 50,
-    targetLightness: 50,
-  },
   waves: [
     { amplitude: 30, frequency: 0.003, speed: 0.02, offset: 0, thickness: 1, opacity: 0.9 },
     { amplitude: 25, frequency: 0.004, speed: 0.015, offset: Math.PI * 0.5, thickness: 0.8, opacity: 0.7 },
@@ -175,7 +158,6 @@ const buildInitialBeam = (filmGrain: FilmGrain): BeamState => ({
   postProcessing: {
     filmGrainIntensity: 0.04,
     vignetteIntensity: 0.4,
-    chromaticAberration: 0.8,
     scanlineIntensity: 0.02,
   },
 });
@@ -273,25 +255,6 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
       return { bass, mid, treble };
     };
 
-    const updateColorTargets = (bass: number, mid: number, treble: number) => {
-      const { colorState } = beam;
-      if (bass > mid && bass > treble) {
-        colorState.targetHue = 0 + bass * 30;
-        colorState.targetSaturation = 80 + bass * 20;
-        colorState.targetLightness = 50 + bass * 10;
-        return;
-      }
-      if (mid > treble) {
-        colorState.targetHue = 40 + mid * 80;
-        colorState.targetSaturation = 20 + mid * 30;
-        colorState.targetLightness = 55 + mid * 15;
-        return;
-      }
-      colorState.targetHue = 200 + treble * 80;
-      colorState.targetSaturation = 20 + treble * 40;
-      colorState.targetLightness = 60 + treble * 10;
-    };
-
     const animate = () => {
       animationRef.current = requestAnimationFrame(animate);
 
@@ -311,24 +274,12 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
         beam.midIntensity = mid;
         beam.trebleIntensity = treble;
 
-        updateColorTargets(bass, mid, treble);
-
         beam.postProcessing.filmGrainIntensity = 0.03 + bass * 0.2;
-        beam.postProcessing.chromaticAberration = treble * 0.5;
       } else {
         beam.bassIntensity = 0.4 + Math.sin(beam.time * 0.01) * 0.3;
         beam.midIntensity = 0.3 + Math.sin(beam.time * 0.015) * 0.2;
         beam.trebleIntensity = 0.2 + Math.sin(beam.time * 0.02) * 0.1;
-        beam.colorState.targetHue = 180 + Math.sin(beam.time * 0.005) * 180;
-        beam.colorState.targetSaturation = 70 + Math.sin(beam.time * 0.01) * 30;
-        beam.colorState.targetLightness = 50 + Math.sin(beam.time * 0.008) * 20;
       }
-
-      beam.colorState.hue += (beam.colorState.targetHue - beam.colorState.hue) * 0.5;
-      beam.colorState.saturation +=
-        (beam.colorState.targetSaturation - beam.colorState.saturation) * 0.2;
-      beam.colorState.lightness +=
-        (beam.colorState.targetLightness - beam.colorState.lightness) * 0.1;
 
       beam.time++;
       const centerY = canvas.height / 2;
@@ -371,8 +322,7 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
       beam.filmGrain.update();
       beam.filmGrain.apply(ctx, {
         intensity: beam.postProcessing.filmGrainIntensity,
-        colorize: true,
-        hue: beam.colorState.hue,
+        colorize: false,
       });
 
       ctx.strokeStyle = `rgba(0, 0, 0, ${beam.postProcessing.scanlineIntensity})`;
@@ -384,32 +334,6 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
         ctx.stroke();
       }
 
-      if (beam.postProcessing.chromaticAberration > 0.1) {
-        ctx.save();
-        ctx.globalCompositeOperation = "screen";
-        ctx.globalAlpha = beam.postProcessing.chromaticAberration * 0.7;
-
-        const tempCanvas = document.createElement("canvas");
-        tempCanvas.width = canvas.width;
-        tempCanvas.height = canvas.height;
-        const tempCtx = tempCanvas.getContext("2d");
-        if (tempCtx) {
-          tempCtx.drawImage(canvas, 0, 0);
-
-          ctx.globalCompositeOperation = "multiply";
-          ctx.fillStyle = "rgb(255, 0, 0)";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.globalCompositeOperation = "screen";
-          ctx.drawImage(tempCanvas, -2 * beam.postProcessing.chromaticAberration, 0);
-
-          ctx.globalCompositeOperation = "multiply";
-          ctx.fillStyle = "rgb(0, 0, 255)";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.globalCompositeOperation = "screen";
-          ctx.drawImage(tempCanvas, 2 * beam.postProcessing.chromaticAberration, 0);
-        }
-        ctx.restore();
-      }
 
       const vignette = ctx.createRadialGradient(
         canvas.width / 2,
@@ -449,16 +373,6 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
       ctx.fillStyle = `rgba(255, 255, 255, ${flicker})`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.save();
-      ctx.globalCompositeOperation = "overlay";
-      ctx.globalAlpha = 0.1;
-      const colorGradeGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      colorGradeGradient.addColorStop(0, "rgb(255, 240, 220)");
-      colorGradeGradient.addColorStop(0.5, "rgb(255, 255, 255)");
-      colorGradeGradient.addColorStop(1, "rgb(220, 230, 255)");
-      ctx.fillStyle = colorGradeGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.restore();
 
       if (Math.random() < 0.005) {
         ctx.strokeStyle = `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.1})`;
@@ -550,7 +464,7 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
 
   return (
     <div className="music-reactive-hero">
-      <canvas ref={canvasRef} className="visualization-canvas" />
+      {/* <canvas ref={canvasRef} className="visualization-canvas" /> */}
 
       <div className="hero-content">
         <p className="hero-tagline">{HERO_TAGLINE}</p>
