@@ -10,8 +10,7 @@ import type * as THREE from "three";
 const BRAND_ID = "DSY.STUDIO";
 const HEADING_LINE_1 = "AGÊNCIA";
 const HEADING_LINE_2 = "CRIATIVA";
-const HERO_SUBTITLE =
-  "Construímos marcas, produtos e experiências digitais que mudam o jogo — do código à campanha.";
+const HERO_SLOGAN = "Orientando ideias, tracionando resultados.";
 const CTA_LABEL = "Começar um projeto";
 const LOGO_ALT = "DSY";
 
@@ -128,7 +127,7 @@ export const ExperienceHero = () => {
             <span className="text-outline">{HEADING_LINE_2}</span>
           </h1>
           <p className="mt-8 max-w-sm font-mono text-[11px] uppercase leading-relaxed tracking-[0.35em] text-white/40">
-            {HERO_SUBTITLE}
+            {HERO_SLOGAN}
           </p>
         </div>
 

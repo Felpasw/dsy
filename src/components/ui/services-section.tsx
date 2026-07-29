@@ -1,48 +1,84 @@
 import { FadeIn } from "@/components/ui/fade-in";
 
 const EYEBROW = "Escopo";
-const TITLE_LINE_1 = "O que a gente";
-const TITLE_LINE_2 = "entrega.";
+const TITLE_LINE_1 = "O que";
+const TITLE_LINE_2 = "entregamos.";
 const INTRO =
-  "Duas frentes que conversam o tempo todo — o digital sustenta o crescimento, o marketing empurra a marca pra frente.";
+  "Dois pilares complementares — tecnologia sustenta o crescimento, marketing constrói a presença.";
 
-const DIGITAL_TITLE = "Soluções digitais";
-const DIGITAL_ITEMS = [
-  "Desenvolvimento, aplicação e manutenção webdev",
-  "Q.A. automatizado B2B e Q.A. manual",
-  "Gestão de até 10 projetos em paralelo",
+type ServiceItem = {
+  title: string;
+  description: string;
+};
+
+const DIGITAL_TITLE = "Soluções digitais e tecnologia";
+const DIGITAL_ITEMS: readonly ServiceItem[] = [
+  {
+    title: "Web Development",
+    description:
+      "Desenvolvimento, aplicação e manutenção contínua de projetos web.",
+  },
+  {
+    title: "Quality Assurance (QA)",
+    description:
+      "Controle de qualidade de software com testes manuais e automatizados focados no mercado B2B.",
+  },
+  {
+    title: "Gestão de projetos",
+    description:
+      "Capacidade de gerenciamento e execução de até 10 projetos simultâneos.",
+  },
 ];
 
-const MARKETING_TITLE = "Marketing";
-const MARKETING_ITEMS = [
-  "Branding empresarial",
-  "Gestão e manutenção de e-commerce",
-  "Tráfego pago — Meta Ads, Google Ads e Mercado Livre",
-  "Merchandising e design de catálogos de produto",
-  "Design de conteúdo pra Instagram e YouTube Shorts",
-  "Planejamento estratégico de conteúdo baseado em métricas",
-  "Logística e produção de material físico com gráficas parceiras",
+const MARKETING_TITLE = "Marketing e presença digital";
+const MARKETING_ITEMS: readonly ServiceItem[] = [
+  {
+    title: "Estratégia e Branding",
+    description:
+      "Construção e fortalecimento de marca corporativa, alinhado a um planejamento estratégico de conteúdo para Instagram guiado por métricas e análise de dados.",
+  },
+  {
+    title: "Performance (Tráfego Pago)",
+    description:
+      "Gestão otimizada de anúncios no Meta Ads, Google Ads e Mercado Livre.",
+  },
+  {
+    title: "E-commerce",
+    description:
+      "Gestão integral e manutenção operacional de lojas virtuais.",
+  },
+  {
+    title: "Design Criativo",
+    description:
+      "Criação de catálogos de produtos e desenvolvimento de conteúdo visual e em vídeo para Instagram e YouTube Shorts.",
+  },
 ];
 
 type ServiceCardProps = {
   title: string;
-  items: readonly string[];
+  items: readonly ServiceItem[];
 };
 
 const ServiceCard = ({ title, items }: ServiceCardProps) => (
   <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-10">
-    <p className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] opacity-60">{title}</p>
-    <ul className="mt-8 flex flex-col gap-4">
+    <p className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] opacity-60">
+      {title}
+    </p>
+    <ul className="mt-8 flex flex-col gap-6">
       {items.map((item) => (
-        <li
-          key={item}
-          className="flex items-start gap-3 text-base leading-relaxed opacity-80 md:text-lg"
-        >
+        <li key={item.title} className="flex items-start gap-3">
           <span
-            className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40"
+            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40"
             aria-hidden="true"
           />
-          <span>{item}</span>
+          <div className="flex flex-col gap-1.5">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-white/90">
+              {item.title}
+            </p>
+            <p className="text-sm leading-relaxed opacity-70 md:text-base">
+              {item.description}
+            </p>
+          </div>
         </li>
       ))}
     </ul>
@@ -63,7 +99,7 @@ export function ServicesSection() {
             <span className="block">{TITLE_LINE_2}</span>
           </h2>
 
-          <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
+          <p className="max-w-lg font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] opacity-50">
             {INTRO}
           </p>
         </FadeIn>

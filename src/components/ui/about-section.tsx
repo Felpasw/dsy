@@ -36,10 +36,10 @@ export function AboutSection() {
             <span className="block">{TITLE_LINE_2}</span>
           </h2>
 
-          <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
+          <p className="max-w-xl text-sm leading-relaxed opacity-70 md:text-base">
             {INTRO_PARAGRAPH}
           </p>
-          <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
+          <p className="max-w-xl text-sm leading-relaxed opacity-70 md:text-base">
             {SECONDARY_PARAGRAPH}
           </p>
         </div>

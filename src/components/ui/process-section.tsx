@@ -60,7 +60,7 @@ const StepBlock = ({ step }: StepBlockProps) => {
       <h3 className="text-2xl font-bold uppercase tracking-tighter md:text-3xl">
         {step.title}
       </h3>
-      <p className="max-w-md text-base leading-relaxed opacity-70 md:text-lg">
+      <p className="max-w-md text-sm leading-relaxed opacity-70 md:text-base">
         {step.description}
       </p>
     </div>
@@ -81,7 +81,7 @@ export function ProcessSection() {
             <span className="block">{TITLE_LINE_2}</span>
           </h2>
 
-          <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
+          <p className="max-w-lg font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] opacity-50">
             {INTRO}
           </p>
         </FadeIn>

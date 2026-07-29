@@ -23,7 +23,7 @@ export function ToolsOrbitSection() {
             <span className="block">{TITLE_LINE_1}</span>
             <span className="block">{TITLE_LINE_2}</span>
           </h2>
-          <p className="max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
+          <p className="max-w-lg font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] opacity-50">
             {SUBTITLE}
           </p>
         </FadeIn>
@@ -34,13 +34,13 @@ export function ToolsOrbitSection() {
 
         <FadeIn
           delay={0.25}
-          className="flex flex-col gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between md:gap-4"
+          className="grid grid-cols-1 items-center gap-6 border-t border-white/10 pt-8 text-center md:grid-cols-3 md:gap-4"
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] opacity-50">
             {COPYRIGHT}
           </p>
 
-          <div className="md:text-center">
+          <div>
             <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] opacity-80">
               {FOUNDER_NAME}
             </p>
@@ -49,7 +49,7 @@ export function ToolsOrbitSection() {
             </p>
           </div>
 
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] opacity-50 md:text-right">
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] opacity-50">
             {TAGLINE}
           </p>
         </FadeIn>
