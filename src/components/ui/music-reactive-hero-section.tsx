@@ -2,15 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const HERO_TAGLINE = "Pagina da DSY";
-const HERO_TITLE_LINE_1 = "A DSY É";
-const HERO_TITLE_LINE_2 = "MUITO GATINHA";
+const HERO_TAGLINE = "Agência criativa";
+const HERO_TITLE_LINE_1 = "IDEIAS QUE";
+const HERO_TITLE_LINE_2 = "MOVEM MARCAS";
 const HERO_SUBTITLE =
-  "Meu deus que mulher linda é de derreter o coração";
-const HERO_CREDIT = "Music by DSY";
+  "Branding, conteúdo e performance pra marcas que querem ser lembradas.";
+const HERO_CREDIT = "© DSY Studio";
 const ARTIST_INITIALS = "DSY";
-const ARTIST_NAME = "dsy";
-const ARTIST_HANDLE = "@dsy.mgt";
+const ARTIST_NAME = "DSY";
 const FPS_LABEL = "FPS: 60";
 const LABEL_LOADING = "LOADING";
 const LABEL_STOP = "STOP";
@@ -339,10 +338,6 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
         const freqInfluence = waveIndex < 2 ? beam.bassIntensity : beam.midIntensity;
         const dynamicAmplitude = wave.amplitude * (1 + freqInfluence * 5);
 
-        const waveHue = beam.colorState.hue + waveIndex * 15;
-        const waveSaturation = beam.colorState.saturation - waveIndex * 5;
-        const waveLightness = beam.colorState.lightness + waveIndex * 5;
-
         const gradient = ctx.createLinearGradient(
           0,
           centerY - dynamicAmplitude,
@@ -350,12 +345,9 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
           centerY + dynamicAmplitude,
         );
         const alpha = wave.opacity * (0.5 + beam.bassIntensity * 0.5);
-        gradient.addColorStop(0, `hsla(${waveHue}, ${waveSaturation}%, ${waveLightness}%, 0)`);
-        gradient.addColorStop(
-          0.5,
-          `hsla(${waveHue}, ${waveSaturation}%, ${waveLightness + 10}%, ${alpha})`,
-        );
-        gradient.addColorStop(1, `hsla(${waveHue}, ${waveSaturation}%, ${waveLightness}%, 0)`);
+        gradient.addColorStop(0, "rgba(255, 255, 255, 0)");
+        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${alpha})`);
+        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
 
         ctx.beginPath();
         for (let x = -50; x <= canvas.width + 50; x += 2) {
@@ -596,7 +588,6 @@ export const Component = ({ audioSrc }: ComponentProps = {}) => {
       <div className="bottom-info">
         <div className="artist-avatar">{ARTIST_INITIALS}</div>
         <span className="artist-name">{ARTIST_NAME}</span>
-        <span className="social-handle">{ARTIST_HANDLE}</span>
       </div>
     </div>
   );

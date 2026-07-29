@@ -188,7 +188,6 @@ body {
   letter-spacing: 0.15em;
 }
 
-.artist-name,
-.social-handle {
+.artist-name {
   opacity: 0.7;
 }
