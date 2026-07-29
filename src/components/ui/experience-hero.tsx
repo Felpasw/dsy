@@ -95,7 +95,7 @@ export const ExperienceHero = () => {
           width={500}
           height={500}
           priority
-          className="absolute left-[78%] top-1/2 h-auto w-48 -translate-x-1/2 -translate-y-1/2 opacity-40 invert md:w-80"
+          className="absolute left-[78%] top-1/2 h-auto w-48 -translate-x-1/2 -translate-y-1/2 opacity-100 invert md:w-80"
         />
       </div>
 
