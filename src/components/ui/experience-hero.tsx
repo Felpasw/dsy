@@ -12,6 +12,7 @@ const HEADING_LINE_1 = "AGÊNCIA";
 const HEADING_LINE_2 = "CRIATIVA";
 const HERO_SLOGAN = "Orientando ideias, tracionando resultados.";
 const CTA_LABEL = "Começar um projeto";
+const CTA_HREF = "https://wa.me/5541920027120";
 const LOGO_ALT = "DSY";
 
 const Monolith = () => {
@@ -39,7 +40,7 @@ const Monolith = () => {
 export const ExperienceHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -131,9 +132,11 @@ export const ExperienceHero = () => {
           </p>
         </div>
 
-        <button
-          type="button"
+        <a
           ref={ctaRef}
+          href={CTA_HREF}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group flex w-fit items-center gap-6"
         >
           <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/15 transition-all duration-500 group-hover:bg-white">
@@ -157,7 +160,7 @@ export const ExperienceHero = () => {
           <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white">
             {CTA_LABEL}
           </span>
-        </button>
+        </a>
       </div>
     </section>
   );
