@@ -7,7 +7,7 @@ const HERO_TITLE_LINE_1 = "IDEIAS QUE";
 const HERO_TITLE_LINE_2 = "MOVEM MARCAS";
 const HERO_SUBTITLE =
   "Branding, conteúdo e performance pra marcas que querem ser lembradas.";
-const HERO_CREDIT = "© DSY Studio";
+const HERO_CREDIT = "© DSY Solutions";
 const ARTIST_INITIALS = "DSY";
 const ARTIST_NAME = "DSY";
 const FPS_LABEL = "FPS: 60";

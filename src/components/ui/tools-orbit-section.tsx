@@ -6,7 +6,7 @@ const TITLE_LINE_1 = "As ferramentas";
 const TITLE_LINE_2 = "que orbitam a gente.";
 const SUBTITLE =
   "Da prancheta ao ar. Um recorte do que a gente usa pra tocar dev, design, mídia paga e conteúdo — sem casar com stack, mas fluente nas que importam.";
-const COPYRIGHT = "© 2026 DSY Studio";
+const COPYRIGHT = "© 2026 DSY Solutions";
 const TAGLINE = "Feito à mão, com cabeça e alma.";
 const FOUNDER_NAME = "Deisy";
 const FOUNDER_LABEL = "Founder & Creative Director";
