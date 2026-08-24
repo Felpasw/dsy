@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DSY — Agência criativa",
+  title: "DSY Solutions — Agência criativa",
   description:
     "Branding, conteúdo e performance pra marcas que querem ser lembradas.",
 };

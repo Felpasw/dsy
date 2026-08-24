@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type * as THREE from "three";
 
-const BRAND_ID = "DSY.STUDIO";
+const BRAND_ID = "DSY.SOLUTIONS";
 const HEADING_LINE_1 = "AGÊNCIA";
 const HEADING_LINE_2 = "CRIATIVA";
 const HERO_SLOGAN = "Orientando ideias, tracionando resultados.";
